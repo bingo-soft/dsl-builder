@@ -1,0 +1,22 @@
+{
+  "name": "@bingo_soft/dsl-builder",
+  "version": "1.0.0",
+  "description": "DSL builder",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bingo-soft/dsl-builder.git"
+  },
+  "scripts": {
+    "lint": "eslint --ext .ts src"
+  },
+  "author": "Bingo-Soft",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.30.0",
+    "typescript": "^4.2.4",
+    "mocha": "9.0.2"
+  }
+}
