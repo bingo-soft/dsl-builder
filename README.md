@@ -1,3 +1,3 @@
 # DSL builder
 
-DSL builder a TypeScript library aimed at creating arbitrary domain specific languages
+DSL builder is a TypeScript library aimed at creating arbitrary domain specific languages
