@@ -1,6 +1,6 @@
 {
   "name": "@bingo_soft/dsl-builder",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "DSL builder",
   "type": "module",
   "repository": {
