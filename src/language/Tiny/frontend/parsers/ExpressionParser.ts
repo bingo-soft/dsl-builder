@@ -1,7 +1,6 @@
 import CodeNodeInterface from '../../../../intermediate/CodeNodeInterface'
 import TokenInterface from '../../../../frontend/TokenInterface'
 import TinyParser from '../TinyParser'
-import TinyScanner from '../TinyScanner'
 
 export default class ExpressionParser extends TinyParser
 {
