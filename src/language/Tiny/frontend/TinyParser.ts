@@ -17,7 +17,7 @@ export default class TinyParser extends AbstractParser
     super(scanner)
   }
 
-  parse(token: TokenInterface | null): CodeNodeInterface | null
+  parse(token?: TokenInterface | null): CodeNodeInterface | null
   {
     const startTime = Date.now()
       

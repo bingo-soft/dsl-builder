@@ -4,13 +4,12 @@
     "description": "",
     "main": "index.html",
     "scripts": {
-      "serve": "parcel serve index.html --host localhost --port 8081",
-      "build": "parcel build --public-url . index.html"
+        "serve": "parcel serve index.html --host localhost --port 8087",
+        "build": "parcel build --public-url . index.html"
     },
     "author": "Bingo-Soft",
     "license": "MIT",
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "parcel-bundler": "^1.12.4",
         "typescript": "^4.2.2"

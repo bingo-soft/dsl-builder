@@ -1,6 +1,6 @@
-import CodeImpl from './Impl/CodeImpl'
-import CodeNodeImpl from './Impl/CodeNodeImpl'
-import CodeNodeTypeImpl from './Impl/CodeNodeTypeImpl'
+import CodeImpl from './impl/CodeImpl'
+import CodeNodeImpl from './impl/CodeNodeImpl'
+import CodeNodeTypeImpl from './impl/CodeNodeTypeImpl'
 
 export default class CodeFactory
 {

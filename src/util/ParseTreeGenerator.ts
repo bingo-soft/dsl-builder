@@ -1,5 +1,5 @@
 import CodeInterface from '../intermediate/CodeInterface'
-import CodeNodeImpl from '../intermediate/Impl/CodeNodeImpl'
+import CodeNodeImpl from '../intermediate/impl/CodeNodeImpl'
 import SymTabEntryInterface from '../intermediate/SymTabEntryInterface'
 
 export default class ParseTreeGenerator

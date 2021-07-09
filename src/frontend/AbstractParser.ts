@@ -28,7 +28,7 @@ export default abstract class AbstractParser extends ListenableTrait implements 
     this.scanner = scanner
   }
 
-  abstract parse(token: TokenInterface | null): CodeNodeInterface | null
+  abstract parse(token?: TokenInterface | null): CodeNodeInterface | null
 
   abstract getErrorCount(): number
 
