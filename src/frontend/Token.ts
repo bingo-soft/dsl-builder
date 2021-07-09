@@ -1,12 +1,14 @@
-import TokenTypeInterface from './TokenTypeInterface'
 import Source from './Source'
+import TokenInterface from './TokenInterface'
+import TokenTypeInterface from './TokenTypeInterface'
 
-export default class Token {
+export default class Token implements TokenInterface
+{
   protected type: TokenTypeInterface
 
   protected text: string
 
-  protected value: unknown
+  protected value: any
 
   protected source: Source
 
@@ -83,7 +85,7 @@ export default class Token {
     return this.text
   }
 
-  getValue(): unknown
+  getValue(): any
   {
     return this.value
   }

@@ -22,7 +22,7 @@ export default interface CodeNodeInterface
 
   setAttribute(key: string, value: unknown): void
     
-  getAttribute(key: string): unknown
+  getAttribute(key: string): any
     
   getAttributes(): { [key: string]: unknown }
     

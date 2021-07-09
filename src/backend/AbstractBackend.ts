@@ -14,5 +14,5 @@ export default abstract class AbstractBackend  extends ListenableTrait implement
     super()
   }
 
-  abstract process(iCode: CodeInterface, symTab: SymTabInterface | null): void
+  abstract process(iCode: CodeInterface, symTab: SymTabInterface | null): any
 }

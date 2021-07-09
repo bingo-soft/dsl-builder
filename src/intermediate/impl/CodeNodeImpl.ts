@@ -83,7 +83,7 @@ export default class CodeNodeImpl implements CodeNodeInterface
     this.attributes[key] = value
   }
 
-  getAttribute(key: string): unknown
+  getAttribute(key: string): any
   {
     if (Object.prototype.hasOwnProperty.call(this.attributes, key)) {
       return this.attributes[key]

@@ -11,6 +11,11 @@ export default class CodeImpl implements CodeInterface
         this.root = root
     }
 
+    setRoot(node: CodeNodeInterface): void
+    {
+        this.root = node
+    }
+
     getRoot(): CodeNodeInterface
     {
         return this.root

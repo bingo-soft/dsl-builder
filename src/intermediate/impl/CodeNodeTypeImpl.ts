@@ -41,26 +41,29 @@ export default class CodeNodeTypeImpl implements CodeNodeTypeInterface
   public static ARITHMETIC_OPS = [CodeNodeTypeImpl.ADD, CodeNodeTypeImpl.SUBTRACT, CodeNodeTypeImpl.MULTIPLY, CodeNodeTypeImpl.DIVIDE]
 
   public static NUMBER = "number"
+  public static FLOAT = "float"
+  public static INTEGER = "integer"
   public static STRING = "string"
+  public static BOOLEAN = "boolean"
 
-  public static isLogic(node: string | null): boolean
+  public static isLogic(nodeType: CodeNodeTypeImpl | null): boolean
   {
-    return CodeNodeTypeImpl.LOGIC_OPS.includes(node)
+    return CodeNodeTypeImpl.LOGIC_OPS.includes(<string> nodeType)
   }
 
-  public static isBoolean(node: string | null): boolean
+  public static isBoolean(nodeType: CodeNodeTypeImpl | null): boolean
   {
-    return CodeNodeTypeImpl.BOOLEAN_OPS.includes(node)
+    return CodeNodeTypeImpl.BOOLEAN_OPS.includes(<string> nodeType)
   }
 
-  public static isRelation(node: string | null): boolean
+  public static isRelation(nodeType: CodeNodeTypeImpl | null): boolean
   {
-    return CodeNodeTypeImpl.RELATION_OPS.includes(node)
+    return CodeNodeTypeImpl.RELATION_OPS.includes(<string> nodeType)
   }
 
-  public static isArithmetic(node: string | null): boolean
+  public static isArithmetic(nodeType: CodeNodeTypeImpl | null): boolean
   {
-    return CodeNodeTypeImpl.ARITHMETIC_OPS.includes(node)
+    return CodeNodeTypeImpl.ARITHMETIC_OPS.includes(<string> nodeType)
   }
        
 }
