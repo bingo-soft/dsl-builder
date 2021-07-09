@@ -12,11 +12,6 @@ import TokenInterface from '../../../frontend/TokenInterface'
 
 export default class TinyParser extends AbstractParser
 {
-  constructor(scanner: TinyScanner)
-  {
-    super(scanner)
-  }
-
   parse(token?: TokenInterface | null): CodeNodeInterface | null
   {
     const startTime = Date.now()
