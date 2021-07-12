@@ -1,3 +1,4 @@
+import ExpressionParser from '../../src/language/Tiny/frontend/parsers/ExpressionParser'
 import BackendFactory from '../../src/backend/BackendFactory'
 import FrontendFactory from '../../src/frontend/FrontendFactory'
 import Source from '../../src/frontend/Source'

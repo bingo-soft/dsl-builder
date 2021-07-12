@@ -1,8 +1,8 @@
 import CodeNodeInterface from '../../../../intermediate/CodeNodeInterface'
 import TokenInterface from '../../../../frontend/TokenInterface'
-import TinyParser from '../TinyParser'
+import { TinyParser } from '../TinyParser'
 
-export default class ExpressionParser extends TinyParser
+export class ExpressionParser extends TinyParser
 {
   parse(token: TokenInterface | null): CodeNodeInterface | null
   {

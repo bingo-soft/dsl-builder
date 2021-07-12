@@ -6,11 +6,11 @@ import CodeKeyImpl from '../../../intermediate/impl/CodeKeyImpl'
 import EofToken from '../../../frontend/EofToken'
 import Message from '../../../message/Message'
 import { MessageType } from '../../../message/MessageType'
-import ExpressionParser from './parsers/ExpressionParser'
+import { ExpressionParser } from './parsers'
 import TinyScanner from './TinyScanner'
 import TokenInterface from '../../../frontend/TokenInterface'
 
-export default class TinyParser extends AbstractParser
+export class TinyParser extends AbstractParser
 {
   parse(token?: TokenInterface | null): CodeNodeInterface | null
   {

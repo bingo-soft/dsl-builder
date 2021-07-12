@@ -1,6 +1,6 @@
 import AbstractParser from './AbstractParser'
 import Source from './Source'
-import TinyParser from '../language/Tiny/frontend/TinyParser'
+import { TinyParser } from '../language/Tiny/frontend/parsers'
 import TinyScanner from '../language/Tiny/frontend/TinyScanner'
 
 export default class FrontendFactory
