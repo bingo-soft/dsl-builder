@@ -1,4 +1,3 @@
-import ExpressionParser from '../../src/language/Tiny/frontend/parsers/ExpressionParser'
 import BackendFactory from '../../src/backend/BackendFactory'
 import FrontendFactory from '../../src/frontend/FrontendFactory'
 import Source from '../../src/frontend/Source'
@@ -17,5 +16,6 @@ evaluate.onclick = function(e: any) {
 
     let iCode = parser.getICode()
 
-    alert(interpreter.process(iCode, null))
+    let targetInput = <HTMLInputElement> document.getElementById('evaluation')
+    targetInput.value = interpreter.process(iCode, null)
 }

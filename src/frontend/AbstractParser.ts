@@ -55,10 +55,9 @@ export default abstract class AbstractParser extends ListenableTrait implements 
   protected parseAddition(rootNode: CodeNodeInterface): CodeNodeInterface | null
   {
     let token = this.currentToken()
-    const tokenValue = token.getValue()
     let tokenType = token.getType()
     let nodeType
-    while (TokenTypeImpl.ADD_OPS.includes(tokenValue)) {
+    while (TokenTypeImpl.ADD_OPS.includes(<string> tokenType)) {
       if (tokenType == TokenTypeImpl.ADD) {
         nodeType = CodeNodeTypeImpl.ADD
       } else if (tokenType == TokenTypeImpl.SUBTRACT) {
@@ -79,10 +78,9 @@ export default abstract class AbstractParser extends ListenableTrait implements 
   protected parseMultiplication(rootNode: CodeNodeInterface): CodeNodeInterface | null
   {
     let token = this.currentToken()
-    const tokenValue = token.getValue()
     let tokenType = token.getType()
     let nodeType
-    while (TokenTypeImpl.MULT_OPS.includes(tokenValue)) {
+    while (TokenTypeImpl.MULT_OPS.includes(<string> tokenType)) {
       if (tokenType == TokenTypeImpl.MULTIPLY) {
         nodeType = CodeNodeTypeImpl.MULTIPLY
       } else if (tokenType == TokenTypeImpl.DIVIDE) {
@@ -141,10 +139,9 @@ export default abstract class AbstractParser extends ListenableTrait implements 
   protected parseRelation(rootNode: CodeNodeInterface | null): CodeNodeInterface | null
   {
     let token = this.currentToken()
-    const tokenValue = token.getValue()
     let tokenType = token.getType()
     let nodeType
-    while (TokenTypeImpl.REL_OPS.includes(tokenValue)) {
+    while (TokenTypeImpl.REL_OPS.includes(<string> tokenType)) {
       if (tokenType == TokenTypeImpl.EQUALS) {
         nodeType = CodeNodeTypeImpl.EQ
       } else if (tokenType == TokenTypeImpl.NOT_EQUALS) {

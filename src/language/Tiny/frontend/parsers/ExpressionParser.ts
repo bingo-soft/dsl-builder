@@ -18,6 +18,7 @@ export class ExpressionParser extends TinyParser
 
   private parseSimpleExpression(token: TokenInterface): CodeNodeInterface | null
   {
+    console.log("parseSimpleExpression");
     let rootNode = this.parseTerm(token)
     rootNode = this.parseAddition(rootNode)
     rootNode = this.parseLogicAnd(rootNode)
@@ -27,6 +28,7 @@ export class ExpressionParser extends TinyParser
 
   protected parseTerm(token: TokenInterface): CodeNodeInterface | null
   {
+    console.log("parseTerm")
     let rootNode = this.parseFactor(token)
     rootNode = this.parseMultiplication(rootNode)
     rootNode = this.parseRelation(rootNode)
