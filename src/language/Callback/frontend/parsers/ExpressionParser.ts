@@ -1,9 +1,11 @@
 import CodeNodeInterface from '../../../../intermediate/CodeNodeInterface'
 import TokenInterface from '../../../../frontend/TokenInterface'
-import { TinyParser } from '../TinyParser'
+import { CallbackParser } from '../CallbackParser'
 
-export class ExpressionParser extends TinyParser
+export class ExpressionParser extends CallbackParser
 {
+  protected retainSemicolon = false
+
   parse(token: TokenInterface | null): CodeNodeInterface | null
   {
     const expression = this.parseExpression(token)

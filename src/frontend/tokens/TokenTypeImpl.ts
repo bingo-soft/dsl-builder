@@ -8,6 +8,7 @@ export default class TokenTypeImpl implements TokenTypeInterface
   public static INTEGER = "integer"
   public static STRING = "string"
   public static BOOLEAN = "boolean"
+  public static RETURN = "return"
 
   public static AND = "and"
   public static OR = "or"

@@ -8,15 +8,18 @@ import ErrorHandler from './ErrorHandler'
 import ListenableTrait from '../message/ListenableTrait'
 import MessageProducerInterface from '../message/MessageProducerInterface'
 import AbstractScanner from './AbstractScanner'
-import SymTabInterface from '../intermediate/SymTabInterface'
+import SymTabFactory from '../intermediate/impl/SymTabFactory'
+import SymTabStackInterface from '../intermediate/SymTabStackInterface'
 import TokenInterface from './TokenInterface'
 import TokenTypeImpl from './tokens/TokenTypeImpl'
 
 export default abstract class AbstractParser extends ListenableTrait implements MessageProducerInterface 
 {
+  protected retainSemicolon = false
+
   protected static errorHandler = new ErrorHandler()
 
-  protected symTab: SymTabInterface
+  protected static symTabStack: SymTabStackInterface = SymTabFactory.createSymTabStack()
 
   protected scanner: AbstractScanner
 
@@ -47,9 +50,9 @@ export default abstract class AbstractParser extends ListenableTrait implements 
     return this.iCode
   }
 
-  getSymTab(): SymTabInterface
+  getSymTabStack(): SymTabStackInterface
   {
-    return this.symTab
+    return AbstractParser.symTabStack
   }
 
   protected parseAddition(rootNode: CodeNodeInterface): CodeNodeInterface | null
@@ -101,7 +104,20 @@ export default abstract class AbstractParser extends ListenableTrait implements 
   {
     let rootNode
     const tokenType = token.getType()
+    let name
+    let id
     switch (tokenType) {
+      case TokenTypeImpl.IDENTIFIER:
+        name = token.getText()
+        id = AbstractParser.symTabStack.lookup(name)
+        if (id == null) {
+          id = AbstractParser.symTabStack.enterLocal(name)
+        }
+        rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.VARIABLE)
+        rootNode.setAttribute(CodeKeyImpl.ID, id)
+        id.appendLineNumber(token.getLineNumber())
+        this.nextToken()        
+        return rootNode
       case TokenTypeImpl.FLOAT:
         rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.FLOAT)
         rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
@@ -129,6 +145,12 @@ export default abstract class AbstractParser extends ListenableTrait implements 
         if (token.getType() == TokenTypeImpl.RIGHT_PAREN) {
           token = this.nextToken()
         }
+        return rootNode
+      case TokenTypeImpl.RETURN:
+        rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.RETURN)
+        token = this.nextToken()
+        rootNode.addChild(this.parseExpression(token))
+        this.nextToken()
         return rootNode
       default:
         AbstractParser.errorHandler.flag(token, ErrorCode.UNEXPECTED_TOKEN, this)

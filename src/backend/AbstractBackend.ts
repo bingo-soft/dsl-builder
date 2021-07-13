@@ -1,11 +1,11 @@
 import CodeInterface from '../intermediate/CodeInterface'
 import ListenableTrait from '../message/ListenableTrait'
 import MessageProducerInterface from '../message/MessageProducerInterface'
-import SymTabInterface from '../intermediate/SymTabInterface'
+import SymTabStackInterface from '../intermediate/SymTabStackInterface'
 
 export default abstract class AbstractBackend  extends ListenableTrait implements MessageProducerInterface
 {
-  private symTab: SymTabInterface
+  protected symTabStack: SymTabStackInterface
 
   protected iCode: CodeInterface
 
@@ -14,5 +14,5 @@ export default abstract class AbstractBackend  extends ListenableTrait implement
     super()
   }
 
-  abstract process(iCode: CodeInterface, symTab: SymTabInterface | null): any
+  abstract process(iCode: CodeInterface, symTabStack: SymTabStackInterface | null, context?: any): any
 }

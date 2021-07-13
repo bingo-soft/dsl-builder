@@ -29,6 +29,6 @@ export default class NumberToken extends Token
       this.value = parseInt(textBuffer, 10)
     }
       this.text = textBuffer
-    }
+  }
 
 }

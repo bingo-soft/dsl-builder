@@ -4,6 +4,10 @@ export default class CodeNodeTypeImpl implements CodeNodeTypeInterface
 {
   public static SCRIPT = "script"
 
+  public static ASSIGN = "assign"
+  public static VARIABLE = "variable"
+  public static RETURN = "return"
+
   public static SUM = "sum"
   public static COUNT = "count"
   public static MIN = "min"

@@ -13,7 +13,7 @@ export default interface SymTabEntryInterface
     
   getLineNumbers(): number[]
     
-  setAttribute(key: SymTabKeyInterface, value: unknown): void
+  setAttribute(key: string, value: any): void
     
-  getAttribute(key: SymTabKeyInterface): unknown
+  getAttribute(key: string): any
 }

@@ -1,5 +1,5 @@
 import AbstractBackend from './AbstractBackend'
-import TinyInterpreter from '../language/Tiny/backend/TinyInterpreter'
+import { TinyInterpreter } from '../language/Tiny/backend/interpreters'
 
 export default class BackendFactory
 {
