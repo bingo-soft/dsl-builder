@@ -3,13 +3,8 @@ import CodeNodeInterface from '../../../../intermediate/CodeNodeInterface'
 import CodeNodeTypeImpl from '../../../../intermediate/impl/CodeNodeTypeImpl'
 import { CallbackInterpreter, AssignmentInterpreter, ExpressionInterpreter } from '../interpreters'
 
-export  class StatementInterpreter extends CallbackInterpreter
+export class StatementInterpreter extends CallbackInterpreter
 {
-  constructor(parent?: AbstractBackend)
-  {
-    super()
-  }
-
   execute(node: CodeNodeInterface): any
   {
     const nodeType = node.getType()
@@ -31,7 +26,7 @@ export  class StatementInterpreter extends CallbackInterpreter
   protected executeItem(node: CodeNodeInterface): any
   {
     const childType = node.getType()  
-    let interpreter     
+    let interpreter
     switch(childType) {
       case CodeNodeTypeImpl.ASSIGN:
         interpreter = new AssignmentInterpreter(this)

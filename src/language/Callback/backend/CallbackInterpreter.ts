@@ -1,13 +1,13 @@
 import AbstractBackend from '../../../backend/AbstractBackend'
 import CodeInterface from '../../../intermediate/CodeInterface'
 import SymTabStackInterface from '../../../intermediate/SymTabStackInterface'
-import { StatementInterpreter } from './interpreters/StatementInterpreter'
+import { StatementInterpreter } from './interpreters'
 
 export class CallbackInterpreter extends AbstractBackend
 {
   protected static context
 
-  constructor(parent?: CallbackInterpreter)
+  constructor(parent?: AbstractBackend)
   {
     super()
   }

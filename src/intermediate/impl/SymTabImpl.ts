@@ -27,7 +27,7 @@ export default class SymTabImpl implements SymTabInterface
     
   lookup(name: string): any
   {
-    return Object.prototype.hasOwnProperty.call(this.map, 'name') ? this.map['name'] : null
+    return Object.prototype.hasOwnProperty.call(this.map, name) ? this.map[name] : null
   }
     
   sortedEntries(): any

@@ -1,4 +1,4 @@
 export * from './CallbackInterpreter'
-export * from './interpreters/StatementInterpreter'
-export * from './interpreters/AssignmentInterpreter'
-export * from './interpreters/ExpressionInterpreter'
+export * from './iterpreters/StatementInterpreter'
+export * from './iterpreters/ExpressionInterpreter'
+export * from './iterpreters/AssignmentInterpreter'

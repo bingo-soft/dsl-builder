@@ -12,7 +12,7 @@ export default class WordToken extends Token
       textBuffer += currentChar
       currentChar = this.nextChar()
     }
-          
+
     if (textBuffer == 'let') {
       this.type = TokenTypeImpl.IDENTIFIER
       while ((/\s+/i).test(currentChar)) {
@@ -32,6 +32,10 @@ export default class WordToken extends Token
     } else if (textBuffer == 'return') {
       this.type = TokenTypeImpl.RETURN
       this.text = textBuffer
-    }    
+    } else {
+      this.type = TokenTypeImpl.IDENTIFIER  
+      this.value = textBuffer
+      this.text = textBuffer
+    }  
   }
 }

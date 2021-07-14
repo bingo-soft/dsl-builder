@@ -9,7 +9,6 @@
     },
     "author": "Bingo-Soft",
     "license": "MIT",
-    "dependencies": {},
     "devDependencies": {
         "parcel-bundler": "^1.12.4",
         "typescript": "^4.2.2"

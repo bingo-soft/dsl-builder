@@ -1,3 +1,4 @@
+import SymTabEntryInterface from '../SymTabEntryInterface'
 import SymTabFactory from './SymTabFactory'
 import SymTabInterface from '../SymTabInterface'
 import SymTabStackInterface from '../SymTabStackInterface'
@@ -26,9 +27,9 @@ export default class SymTabStackImpl implements SymTabStackInterface
     return this.symTabs[this.currentNestingLevel]
   }
       
-  enterLocal(name: string): void
+  enterLocal(name: string): SymTabEntryInterface
   {
-    this.symTabs[this.currentNestingLevel].enter(name)
+    return this.symTabs[this.currentNestingLevel].enter(name)
   }
       
   lookupLocal(name: string): any

@@ -1,3 +1,4 @@
+import SymTabEntryInterface from './SymTabEntryInterface'
 import SymTabInterface from './SymTabInterface'
 
 export default interface SymTabStackInterface
@@ -6,7 +7,7 @@ export default interface SymTabStackInterface
     
   getLocalSymTab(): SymTabInterface
     
-  enterLocal(name: string): void
+  enterLocal(name: string): SymTabEntryInterface
     
   lookupLocal(name: string): any
     

@@ -19,10 +19,11 @@ export class CallbackParser extends AbstractParser
       const rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.SCRIPT)      
       this.iCode = CodeFactory.createCode()       
       this.iCode.setRoot(rootNode)
-        
-      while (!((token = this.nextToken()) instanceof EofToken)) {
+      
+      token = this.nextToken()
+      while (!(token instanceof EofToken)) {
         const statementParser = new StatementParser(<CallbackScanner> this.scanner)
-        const node = statementParser.parse(token)
+        const node = statementParser.parse(token)        
         if (node != null) {
           rootNode.addChild(node)
         }            

@@ -15,6 +15,7 @@ export class AssignmentParser extends StatementParser
     const saveToken = token
     const targetName = token.getText()
     let targetId = AssignmentParser.symTabStack.lookup(targetName)   
+    
     if (targetId == null) {
       targetId = AssignmentParser.symTabStack.enterLocal(targetName)
     }
@@ -36,7 +37,6 @@ export class AssignmentParser extends StatementParser
         
     const expressionParser = new ExpressionParser(this.scanner)
     assignNode.addChild(expressionParser.parse(token))
-        
     this.setLineNumber(assignNode, saveToken)
         
     return assignNode

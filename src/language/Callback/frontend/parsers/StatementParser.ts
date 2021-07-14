@@ -1,4 +1,4 @@
-import { CallbackParser, AssignmentParser }  from '../parsers'
+import { CallbackParser, AssignmentParser, ExpressionParser }  from '../parsers'
 import CodeNodeInterface from '../../../../intermediate/CodeNodeInterface'
 import ErrorCode from '../../../../frontend/ErrorCode'
 import TokenInterface from '../../../../frontend/TokenInterface'
@@ -14,6 +14,9 @@ export class StatementParser extends CallbackParser
     {
       case TokenTypeImpl.IDENTIFIER:
         parser = new AssignmentParser(this.scanner)
+        return parser.parse(token)
+      case TokenTypeImpl.RETURN:
+        parser = new ExpressionParser(this.scanner)
         return parser.parse(token)
       case TokenTypeImpl.SEMICOLON:
         return null
