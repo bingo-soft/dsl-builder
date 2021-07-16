@@ -13,6 +13,7 @@ export class StatementParser extends CallbackParser
   {
     const tokenType = token.getType()
     let parser
+    let node
     switch(tokenType)
     {
       case TokenTypeImpl.IDENTIFIER:
@@ -20,7 +21,7 @@ export class StatementParser extends CallbackParser
         return parser.parse(token)
       case TokenTypeImpl.RETURN:
         parser = new ExpressionParser(this.scanner)
-        const node = parser.parse(token)
+        node = parser.parse(token)
         return node
       case TokenTypeImpl.IF:
       case TokenTypeImpl.ELSEIF:
@@ -41,7 +42,7 @@ export class StatementParser extends CallbackParser
     token = this.nextToken()
     while (!(token instanceof EofToken)) {
       tokenType = token.getType()
-      parser = new StatementParser(this)
+      parser = new StatementParser(this.scanner)
       node = parser.parse(token)
       token = this.currentToken()
       if (tokenType == TokenTypeImpl.CURLY_LEFT_PAREN) {

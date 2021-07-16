@@ -126,7 +126,7 @@ export default class Source extends ListenableTrait implements MessageProducerIn
 
   getContextValue(key: string, value?: any): any
   {
-    let data = value ?? this.context
+    const data = value ?? this.context
     let topKey = key
     let nested = false
     if (key.indexOf(".") != -1) {
@@ -135,7 +135,7 @@ export default class Source extends ListenableTrait implements MessageProducerIn
     }
     if (data != null && Object.prototype.hasOwnProperty.call(data, topKey)) {
       if (nested) {
-        let newKey = key.split(".").slice(1).join(".")
+        const newKey = key.split(".").slice(1).join(".")
         return this.getContextValue(newKey, data[topKey])
       } else {
         return data[key]

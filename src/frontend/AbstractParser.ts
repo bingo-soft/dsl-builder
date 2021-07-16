@@ -138,7 +138,7 @@ export default abstract class AbstractParser extends ListenableTrait implements 
       case TokenTypeImpl.STRING:
         rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.STRING)
         rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
-        const nxt = this.nextToken()
+        this.nextToken()
         return rootNode
       case TokenTypeImpl.BOOLEAN:
         rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.BOOLEAN)

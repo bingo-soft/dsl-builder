@@ -8,7 +8,7 @@ export default class WordToken extends Token
     let currentChar = this.currentChar()
           
     let textBuffer = ''
-    while ((/[a-zA-Z0-9\._]+/i).test(currentChar)) {
+    while ((/[a-zA-Z0-9._]+/i).test(currentChar)) {
       textBuffer += currentChar
       currentChar = this.nextChar()
     }

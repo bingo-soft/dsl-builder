@@ -27,6 +27,8 @@ export class StatementInterpreter extends CallbackInterpreter
   {
     const childType = node.getType()  
     let interpreter
+    let ret
+    let grandchild
     switch(childType) {
       case CodeNodeTypeImpl.ASSIGN:
         interpreter = new AssignmentInterpreter(this)
@@ -34,13 +36,13 @@ export class StatementInterpreter extends CallbackInterpreter
         break
       case CodeNodeTypeImpl.IF:
         interpreter = new IfElseInterpreter(this)
-        let ret = interpreter.execute(node)
+        ret = interpreter.execute(node)
         if (ret != null) {
             return ret
         }
         break
       case CodeNodeTypeImpl.RETURN:
-        const grandchild = node.getChildren()[0]
+        grandchild = node.getChildren()[0]
         interpreter = new ExpressionInterpreter(this)
         return interpreter.execute(grandchild)
       default:

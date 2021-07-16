@@ -15,7 +15,7 @@ export class IfElseParser extends StatementParser
 
     this.nextToken()
 
-    const exprParser = new ExpressionParser(this)
+    const exprParser = new ExpressionParser(this.scanner)
 
     token = this.nextToken()
     
@@ -24,23 +24,23 @@ export class IfElseParser extends StatementParser
 
     token = this.nextToken()
     
-    let statementParser = new StatementParser(this)
+    let statementParser = new StatementParser(this.scanner)
     statementParser.parseBody(token, ifNode)
 
     token = this.currentToken()
-    let tokenType = token.getType()
+    const tokenType = token.getType()
     
     if (tokenType == TokenTypeImpl.ELSE) {
       token = this.nextToken()
       const elseNode = tokenType == TokenTypeImpl.ELSE ? CodeFactory.createCodeNode(CodeNodeTypeImpl.ELSE) : CodeFactory.createCodeNode(CodeNodeTypeImpl.ELSEIF)
       ifNode.addChild(elseNode)
 
-      statementParser = new StatementParser(this)
+      statementParser = new StatementParser(this.scanner)
       statementParser.parseBody(token, elseNode)
 
       this.nextToken() //???
     } else if (tokenType == TokenTypeImpl.ELSEIF) {
-      let statementParser = new StatementParser(this)
+      const statementParser = new StatementParser(this.scanner)
       const elseIfNode = statementParser.parse(token)
       ifNode.addChild(elseIfNode)
     }
