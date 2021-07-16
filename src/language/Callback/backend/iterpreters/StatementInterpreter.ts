@@ -1,7 +1,7 @@
 import AbstractBackend from '../../../../backend/AbstractBackend'
 import CodeNodeInterface from '../../../../intermediate/CodeNodeInterface'
 import CodeNodeTypeImpl from '../../../../intermediate/impl/CodeNodeTypeImpl'
-import { CallbackInterpreter, AssignmentInterpreter, ExpressionInterpreter } from '../interpreters'
+import { CallbackInterpreter, AssignmentInterpreter, ExpressionInterpreter, IfElseInterpreter } from '../interpreters'
 
 export class StatementInterpreter extends CallbackInterpreter
 {
@@ -31,6 +31,13 @@ export class StatementInterpreter extends CallbackInterpreter
       case CodeNodeTypeImpl.ASSIGN:
         interpreter = new AssignmentInterpreter(this)
         interpreter.execute(node)
+        break
+      case CodeNodeTypeImpl.IF:
+        interpreter = new IfElseInterpreter(this)
+        let ret = interpreter.execute(node)
+        if (ret != null) {
+            return ret
+        }
         break
       case CodeNodeTypeImpl.RETURN:
         const grandchild = node.getChildren()[0]

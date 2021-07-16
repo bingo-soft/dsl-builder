@@ -7,6 +7,8 @@ export default class CodeNodeTypeImpl implements CodeNodeTypeInterface
   public static ASSIGN = "assign"
   public static VARIABLE = "variable"
   public static RETURN = "return"
+  public static CONTEXT = "context"
+  public static FUNCTION = "function"
 
   public static SUM = "sum"
   public static COUNT = "count"
@@ -16,14 +18,14 @@ export default class CodeNodeTypeImpl implements CodeNodeTypeInterface
   public static AND = "and"
   public static OR = "or"
   public static IF = "if"
-  public static THEN = "then"
   public static ELSE = "else"
+  public static ELSEIF = "elseif"
+  public static BODY = "body"
   public static NOT = "not"
   public static TRUE = "true"
   public static FALSE = "false"
 
   public static LOGIC_OPS = [CodeNodeTypeImpl.AND, CodeNodeTypeImpl.OR]
-  public static BOOLEAN_OPS = [CodeNodeTypeImpl.TRUE, CodeNodeTypeImpl.FALSE]
 
   // ==, !=, ...
   public static EQ = "eq"
@@ -49,6 +51,8 @@ export default class CodeNodeTypeImpl implements CodeNodeTypeInterface
   public static INTEGER = "integer"
   public static STRING = "string"
   public static BOOLEAN = "boolean"
+
+  public static BOOLEAN_OPS = [CodeNodeTypeImpl.TRUE, CodeNodeTypeImpl.FALSE, CodeNodeTypeImpl.BOOLEAN]
 
   public static isLogic(nodeType: CodeNodeTypeImpl | null): boolean
   {

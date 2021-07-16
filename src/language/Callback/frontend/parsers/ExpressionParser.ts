@@ -22,14 +22,13 @@ export class ExpressionParser extends CallbackParser
   {
     let rootNode = this.parseTerm(token)
     rootNode = this.parseAddition(rootNode)
-    rootNode = this.parseLogicAnd(rootNode)
-    rootNode = this.parseLogicOr(rootNode)
     return rootNode
   }
 
   protected parseTerm(token: TokenInterface): CodeNodeInterface | null
   {
     let rootNode = this.parseFactor(token)
+    rootNode = this.parseFunction(rootNode)
     rootNode = this.parseMultiplication(rootNode)
     rootNode = this.parseRelation(rootNode)
     return rootNode

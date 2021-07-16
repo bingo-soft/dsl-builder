@@ -7,7 +7,8 @@ const evaluate: HTMLElement = document.getElementById("evaluate")
 
 evaluate.onclick = function(e: any) {
 
-    let source = new Source((<HTMLInputElement> document.getElementById("expression")).value)
+    let context = (<HTMLInputElement> document.getElementById("context")).value
+    let source = new Source((<HTMLInputElement> document.getElementById("expression")).value, context ? JSON.parse(context) : null)
 
     let parser = FrontendFactory.createParser("callback", source)
     let interpreter = BackendFactory.createBackend("callback")

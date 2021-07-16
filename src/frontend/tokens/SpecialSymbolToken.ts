@@ -6,11 +6,10 @@ export default class SpecialSymbolToken extends Token
   extract(): void
   {
     let currentChar = this.currentChar()
-    let prevChar
+    let prevChar = currentChar
     switch(currentChar) {
       case "+":
       case "-":
-        prevChar = currentChar
         currentChar = this.nextChar()
         if (currentChar == prevChar) {
           if (currentChar == '+') {
@@ -30,7 +29,6 @@ export default class SpecialSymbolToken extends Token
         }
         break
       case "=":
-        prevChar = currentChar
         currentChar = this.nextChar()
         if (currentChar == prevChar) {
           this.type = TokenTypeImpl.EQUALS
@@ -65,6 +63,33 @@ export default class SpecialSymbolToken extends Token
           this.type = (prevChar == '>') ? TokenTypeImpl.GREATER_THAN : TokenTypeImpl.LESS_THAN
           this.value = prevChar
         }
+        break
+      case "&":      
+        currentChar = this.nextChar()
+        if (currentChar == '&') {
+          this.type = TokenTypeImpl.AND
+          this.value = '&&'
+          this.nextChar()
+        }
+        break
+      case "|":
+        currentChar = this.nextChar()
+        if (currentChar == '|') {
+          this.type = TokenTypeImpl.OR
+          this.value = '||'
+          this.nextChar()
+        }
+        break
+      case ",":
+        this.type = TokenTypeImpl.COMMA
+        this.value = ','
+        this.nextChar()
+        break
+      case "{":
+      case "}":      
+        this.type = (currentChar == '}') ? TokenTypeImpl.CURLY_RIGHT_PAREN : TokenTypeImpl.CURLY_LEFT_PAREN
+        this.value = currentChar
+        this.nextChar()
         break
       default:
         break

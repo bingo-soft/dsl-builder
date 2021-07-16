@@ -3,6 +3,7 @@ import CodeInterface from '../intermediate/CodeInterface'
 import CodeKeyImpl from '../intermediate/impl/CodeKeyImpl'
 import CodeNodeInterface from '../intermediate/CodeNodeInterface'
 import CodeNodeTypeImpl from '../intermediate/impl/CodeNodeTypeImpl'
+import EofToken from './EofToken'
 import ErrorCode from './ErrorCode'
 import ErrorHandler from './ErrorHandler'
 import ListenableTrait from '../message/ListenableTrait'
@@ -24,6 +25,8 @@ export default abstract class AbstractParser extends ListenableTrait implements 
   protected scanner: AbstractScanner
 
   protected iCode: CodeInterface
+
+  private parentheses = 0
 
   constructor(scanner: AbstractScanner)
   {
@@ -60,11 +63,13 @@ export default abstract class AbstractParser extends ListenableTrait implements 
     let token = this.currentToken()
     let tokenType = token.getType()
     let nodeType
-    while (TokenTypeImpl.ADD_OPS.includes(<string> tokenType)) {
+    while (TokenTypeImpl.ADD_OPS.includes(<string> tokenType) || tokenType == TokenTypeImpl.OR) {
       if (tokenType == TokenTypeImpl.ADD) {
         nodeType = CodeNodeTypeImpl.ADD
       } else if (tokenType == TokenTypeImpl.SUBTRACT) {
         nodeType = CodeNodeTypeImpl.SUBTRACT
+      } else if (tokenType == TokenTypeImpl.OR) {
+        nodeType = CodeNodeTypeImpl.OR
       }
       const opNode = CodeFactory.createCodeNode(nodeType)
       opNode.addChild(rootNode)
@@ -74,7 +79,7 @@ export default abstract class AbstractParser extends ListenableTrait implements 
       token = this.currentToken()
       tokenType = token.getType()
     }
-    return rootNode;
+    return rootNode
   }
 
 
@@ -83,11 +88,13 @@ export default abstract class AbstractParser extends ListenableTrait implements 
     let token = this.currentToken()
     let tokenType = token.getType()
     let nodeType
-    while (TokenTypeImpl.MULT_OPS.includes(<string> tokenType)) {
+    while (TokenTypeImpl.MULT_OPS.includes(<string> tokenType) || tokenType == TokenTypeImpl.AND) {
       if (tokenType == TokenTypeImpl.MULTIPLY) {
         nodeType = CodeNodeTypeImpl.MULTIPLY
       } else if (tokenType == TokenTypeImpl.DIVIDE) {
         nodeType = CodeNodeTypeImpl.DIVIDE
+      } else if (tokenType == TokenTypeImpl.AND) {
+        nodeType = CodeNodeTypeImpl.AND
       }
       const opNode = CodeFactory.createCodeNode(nodeType)
       opNode.addChild(rootNode)
@@ -131,10 +138,15 @@ export default abstract class AbstractParser extends ListenableTrait implements 
       case TokenTypeImpl.STRING:
         rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.STRING)
         rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
-        this.nextToken()
+        const nxt = this.nextToken()
         return rootNode
       case TokenTypeImpl.BOOLEAN:
         rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.BOOLEAN)
+        rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
+        this.nextToken()
+        return rootNode
+      case TokenTypeImpl.CONTEXT:
+        rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.CONTEXT)
         rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
         this.nextToken()
         return rootNode
@@ -150,7 +162,11 @@ export default abstract class AbstractParser extends ListenableTrait implements 
         rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.RETURN)
         token = this.nextToken()
         rootNode.addChild(this.parseExpression(token))
-        this.nextToken()
+        /* this.nextToken() */ // inside if block it is nt needed, otherwise } consumed
+        return rootNode
+      case TokenTypeImpl.FUNCTION:
+        rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.FUNCTION)
+        rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
         return rootNode
       default:
         AbstractParser.errorHandler.flag(token, ErrorCode.UNEXPECTED_TOKEN, this)
@@ -186,50 +202,48 @@ export default abstract class AbstractParser extends ListenableTrait implements 
       token = this.currentToken()
       tokenType = token.getType()
     }
-
     return rootNode
   }
 
-  protected parseLogicAnd(rootNode: CodeNodeInterface | null): CodeNodeInterface | null
+  protected parseFunction(rootNode: CodeNodeInterface | null): CodeNodeInterface | null
   {
     let token = this.currentToken()
     let tokenType = token.getType()
-    let nodeType
-    while (tokenType == TokenTypeImpl.AND) {
-      nodeType = CodeNodeTypeImpl.AND
-      const opNode = CodeFactory.createCodeNode(nodeType)
-      opNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
-      opNode.addChild(rootNode)
+    let node
+    if (tokenType == TokenTypeImpl.FUNCTION) {
       token = this.nextToken()
-      opNode.addChild(this.parseTerm(token))
-      rootNode = opNode
-      token = this.currentToken()
       tokenType = token.getType()
+      if (tokenType == TokenTypeImpl.LEFT_PAREN) {
+        this.parentheses = 1
+        while (!((token = this.nextToken()) instanceof EofToken)) {
+          tokenType = token.getType()
+          if (tokenType == TokenTypeImpl.COMMA) {
+            continue          
+          }
+          node = this.parseExpression(token)
+          //node.setAttribute(CodeKeyImpl.FUNCTION, rootNode.getAttribute(CodeKeyImpl.VALUE))
+          if (node != null) {
+            rootNode.addChild(node)
+          } 
+          token = this.currentToken()
+          tokenType = token.getType()
+          if (tokenType == TokenTypeImpl.LEFT_PAREN) {
+            this.parentheses += 1
+            continue
+          }
+          if (tokenType == TokenTypeImpl.RIGHT_PAREN) {
+            this.parentheses -= 1
+            if (this.parentheses == 0) {
+              break
+            }
+            continue
+          }                   
+        }
+        this.nextToken() //??? consume paranthesis
+      }
     }
     return rootNode
   }
-
-  protected parseLogicOr(rootNode: CodeNodeInterface | null): CodeNodeInterface | null
-  {
-    let token = this.currentToken()
-    let tokenType = token.getType()
-    let nodeType
-    while (tokenType == TokenTypeImpl.OR) {
-      nodeType = CodeNodeTypeImpl.OR
-      const opNode = CodeFactory.createCodeNode(nodeType)
-      opNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
-      opNode.addChild(rootNode)
-      token = this.nextToken()
-      let child = this.parseTerm(token)
-      child = this.parseLogicAnd(child)
-      opNode.addChild(child)
-      rootNode = opNode
-      token = this.currentToken()
-      tokenType = token.getType()
-    }
-    return rootNode
-  }
-
 
   protected parseExpression(token: TokenInterface | null): CodeNodeInterface | null
   {
@@ -239,6 +253,6 @@ export default abstract class AbstractParser extends ListenableTrait implements 
   protected parseTerm(token: TokenInterface): CodeNodeInterface | null
   {
     return null
-  }
+  }  
   
 }

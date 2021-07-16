@@ -1,4 +1,6 @@
 export * from './CallbackInterpreter'
 export * from './iterpreters/StatementInterpreter'
+export * from './iterpreters/FunctionInterpreter'
 export * from './iterpreters/ExpressionInterpreter'
 export * from './iterpreters/AssignmentInterpreter'
+export * from './iterpreters/IfElseInterpreter'

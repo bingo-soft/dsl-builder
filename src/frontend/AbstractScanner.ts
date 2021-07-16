@@ -48,7 +48,7 @@ export default abstract class AbstractScanner {
   {
     let currentChar = this.currentChar()
       
-    while ((/^[\s|\r\n|\n|\t]+/.test(currentChar)) || currentChar == '/') {
+    while ((/\s+/.test(currentChar)) || currentChar == '/') {
       // Start a comment
       if (currentChar == '/') {
         const nextChar = this.peekChar()

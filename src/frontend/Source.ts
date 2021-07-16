@@ -20,10 +20,13 @@ export default class Source extends ListenableTrait implements MessageProducerIn
 
   private currentPos = -2
 
-  constructor(source: string)
+  private context
+
+  constructor(source: string, context?: any)
   {
     super()
     this.source = source
+    this.context = context
   }
 
   currentChar(): string
@@ -119,5 +122,26 @@ export default class Source extends ListenableTrait implements MessageProducerIn
   getPosition(): number
   {
     return this.currentPos
+  }
+
+  getContextValue(key: string, value?: any): any
+  {
+    let data = value ?? this.context
+    let topKey = key
+    let nested = false
+    if (key.indexOf(".") != -1) {
+      nested = true
+      topKey = key.split(".")[0]
+    }
+    if (data != null && Object.prototype.hasOwnProperty.call(data, topKey)) {
+      if (nested) {
+        let newKey = key.split(".").slice(1).join(".")
+        return this.getContextValue(newKey, data[topKey])
+      } else {
+        return data[key]
+      }
+    } else {
+      return null
+    }
   }
 }

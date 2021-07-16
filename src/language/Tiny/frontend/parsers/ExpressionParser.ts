@@ -20,8 +20,6 @@ export class ExpressionParser extends TinyParser
   {
     let rootNode = this.parseTerm(token)
     rootNode = this.parseAddition(rootNode)
-    rootNode = this.parseLogicAnd(rootNode)
-    rootNode = this.parseLogicOr(rootNode)
     return rootNode
   }
 

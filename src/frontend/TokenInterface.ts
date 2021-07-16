@@ -11,4 +11,6 @@ export default interface TokenInterface
     getType(): TokenTypeInterface | null
 
     getValue(): any
+
+    getContextValue(key: string): any
 }

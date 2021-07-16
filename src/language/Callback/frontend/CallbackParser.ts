@@ -23,11 +23,11 @@ export class CallbackParser extends AbstractParser
       token = this.nextToken()
       while (!(token instanceof EofToken)) {
         const statementParser = new StatementParser(<CallbackScanner> this.scanner)
-        const node = statementParser.parse(token)        
+        const node = statementParser.parse(token)
         if (node != null) {
           rootNode.addChild(node)
-        }            
-        token = this.currentToken()      
+        }      
+        token = this.currentToken() 
       }    
       
       const elapsedTime = Date.now() - startTime

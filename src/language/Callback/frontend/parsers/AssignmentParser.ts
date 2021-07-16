@@ -22,7 +22,6 @@ export class AssignmentParser extends StatementParser
 
     targetId.appendLineNumber(token.getLineNumber())
 
-    //consume = symbol
     token = this.nextToken()
     const variableNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.VARIABLE)
     variableNode.setAttribute(CodeKeyImpl.ID, targetId)

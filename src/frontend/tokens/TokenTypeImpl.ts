@@ -9,9 +9,14 @@ export default class TokenTypeImpl implements TokenTypeInterface
   public static STRING = "string"
   public static BOOLEAN = "boolean"
   public static RETURN = "return"
+  public static CONTEXT = "context"
+  public static FUNCTION = "function"
+  public static IF = "if"
+  public static ELSE = "else"
+  public static ELSEIF = "elseif"
 
-  public static AND = "and"
-  public static OR = "or"
+  public static AND = "&&"
+  public static OR = "||"
 
   public static ASSIGN = "="
   public static EQUALS = "=="
@@ -33,6 +38,8 @@ export default class TokenTypeImpl implements TokenTypeInterface
 
   public static LEFT_PAREN = "("
   public static RIGHT_PAREN = ")"
+  public static CURLY_LEFT_PAREN = "{"
+  public static CURLY_RIGHT_PAREN = "}"
   public static COMMA = ","
   public static SEMICOLON = ";"
 
@@ -40,5 +47,5 @@ export default class TokenTypeImpl implements TokenTypeInterface
   public static MULT_OPS = ["*", "/"]
   public static REL_OPS = ['==', '!=', '>', '>=', '<', '<=']
 
-  public static SPECIAL_SYMBOLS = ['+', '-', '=', '*', '/', '(', ')', '>', '<', ',', ';']
+  public static SPECIAL_SYMBOLS = ['+', '-', '=', '*', '/', '(', ')', '>', '<', ',', ';', '&', '|', ',', '{', '}']
 }

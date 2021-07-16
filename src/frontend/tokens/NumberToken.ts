@@ -28,7 +28,7 @@ export default class NumberToken extends Token
       this.type = TokenTypeImpl.INTEGER
       this.value = parseInt(textBuffer, 10)
     }
-      this.text = textBuffer
+    this.text = textBuffer
   }
 
 }

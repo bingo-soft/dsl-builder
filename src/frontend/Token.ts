@@ -90,4 +90,9 @@ export default class Token implements TokenInterface
     return this.value
   }
 
+  getContextValue(key: string): any
+  {
+    return this.source.getContextValue(key)
+  }
+
 }
