@@ -7,6 +7,7 @@ import StringToken from '../../../frontend/tokens/StringToken'
 import TokenInterface from '../../../frontend/TokenInterface'
 import CallbackTokenType from './CallbackTokenType'
 import WordToken from './tokens/WordToken'
+import ArrayToken from './tokens/ArrayToken'
 
 export default class CallbackScanner extends AbstractScanner
 {
@@ -29,6 +30,10 @@ export default class CallbackScanner extends AbstractScanner
 
     if (currentChar == "'") {
       return new StringToken(this.source)
+    }
+
+    if (currentChar == "[") {
+      return new ArrayToken(this.source)
     }
 
     if (CallbackTokenType.SPECIAL_SYMBOLS.includes(currentChar)) {

@@ -27,7 +27,17 @@ export class FunctionInterpreter extends StatementInterpreter
     if (typeof firstNodeValue == 'string' || firstNodeValue instanceof String) {
       return String.prototype.includes.call(firstNodeValue, interpreter.execute(children[1]))
     } else if (Array.isArray(firstNodeValue)) {
-      return Array.prototype.includes.call(firstNodeValue, interpreter.execute(children[1]))
+      const needle = interpreter.execute(children[1])
+      if (Array.isArray(needle)) {
+        for (let i = 0; i < needle.length; i += 1) {
+          if (!Array.prototype.includes.call(firstNodeValue, needle[i])) {
+            return false
+          }
+        }
+        return true
+      } else {
+        return Array.prototype.includes.call(firstNodeValue, needle)
+      }
     }
     return null
   }

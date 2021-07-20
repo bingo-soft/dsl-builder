@@ -9,6 +9,7 @@ export default class CodeNodeTypeImpl implements CodeNodeTypeInterface
   public static RETURN = "return"
   public static CONTEXT = "context"
   public static FUNCTION = "function"
+  public static ARRAY = "array"
 
   public static SUM = "sum"
   public static COUNT = "count"

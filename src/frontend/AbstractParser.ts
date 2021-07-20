@@ -150,6 +150,11 @@ export default abstract class AbstractParser extends ListenableTrait implements 
         rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
         this.nextToken()
         return rootNode
+      case TokenTypeImpl.ARRAY:
+        rootNode = CodeFactory.createCodeNode(CodeNodeTypeImpl.ARRAY)
+        rootNode.setAttribute(CodeKeyImpl.VALUE, token.getValue())
+        this.nextToken()
+        return rootNode
       case TokenTypeImpl.LEFT_PAREN:
         token = this.nextToken()
         rootNode = this.parseExpression(token)

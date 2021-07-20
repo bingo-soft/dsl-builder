@@ -14,6 +14,7 @@ export default class TokenTypeImpl implements TokenTypeInterface
   public static IF = "if"
   public static ELSE = "else"
   public static ELSEIF = "elseif"
+  public static ARRAY = "array"
 
   public static AND = "&&"
   public static OR = "||"
